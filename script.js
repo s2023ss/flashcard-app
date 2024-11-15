@@ -109,6 +109,19 @@ async function saveWord() {
     }
 
     try {
+        // Mevcut kelimeyi kontrol et
+        const { data: existingWords, error: checkError } = await supabase
+            .from('words')
+            .select('*')
+            .eq('word', word);
+
+        if (checkError) throw checkError;
+
+        if (existingWords.length > 0) {
+            alert('Bu kelime zaten mevcut!');
+            return;
+        }
+
         console.log('Kelime kaydediliyor:', { word, meaning });
         const { data, error } = await supabase
             .from('words')
