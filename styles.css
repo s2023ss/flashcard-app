@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #1a73e8;
+    margin-bottom: 30px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1557b0;
+}
+
+.hidden {
+    display: none;
+}
+
+#addWordForm {
+    margin: 20px 0;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.flashcard {
+    width: 300px;
+    height: 200px;
+    margin: 20px auto;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.flashcard-front {
+    background-color: white;
+    color: #1a73e8;
+}
+
+.flashcard-back {
+    background-color: #1a73e8;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.flashcard-buttons {
+    margin-top: 20px;
+}
+
+/* Cevap seçenekleri için stiller */
+.answer-options {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.answer-btn {
+    padding: 15px 25px;
+    background-color: #f0f2f5;
+    border: 2px solid #1a73e8;
+    color: #1a73e8;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 200px;
+    max-width: 45%;
+}
+
+.answer-btn:hover {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.answer-btn.correct {
+    background-color: #34a853;
+    border-color: #34a853;
+    color: white;
+}
+
+.answer-btn.wrong {
+    background-color: #ea4335;
+    border-color: #ea4335;
+    color: white;
+}
+
+.feedback {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.feedback.correct {
+    background-color: #34a853;
+    color: white;
+}
+
+.feedback.wrong {
+    background-color: #ea4335;
+    color: white;
+}
+
+/* İstatistik stilleri */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 10px;
+    min-width: 100px;
+}
+
+.stat-item span:first-child {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat-item span:last-child {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+#correctCount {
+    color: #34a853;
+}
+
+#wrongCount {
+    color: #ea4335;
+}

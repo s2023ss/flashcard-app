@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelime Öğrenme Kartları</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Kelime Öğrenme Kartları</h1>
+        
+        <div class="controls">
+            <button id="addWordBtn">Yeni Kelime Ekle</button>
+            <button id="startLearningBtn">Öğrenmeye Başla</button>
+            <!-- İstatistik bölümü -->
+            <div id="stats" class="stats">
+                <div class="stat-item">
+                    <span>Doğru:</span>
+                    <span id="correctCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Yanlış:</span>
+                    <span id="wrongCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Başarı Oranı:</span>
+                    <span id="successRate">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kelime Ekleme Formu -->
+        <div id="addWordForm" class="hidden">
+            <input type="text" id="wordInput" placeholder="Kelime">
+            <input type="text" id="meaningInput" placeholder="Anlamı">
+            <button id="saveWordBtn">Kaydet</button>
+        </div>
+
+        <!-- Flashcard Alanı -->
+        <div id="flashcardArea" class="hidden">
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <p id="wordDisplay"></p>
+                    </div>
+                    <div class="flashcard-back">
+                        <p id="meaningDisplay"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="flashcard-buttons">
+                <button id="prevBtn">Önceki</button>
+                <button id="nextBtn">Sonraki</button>
+            </div>
+            <!-- Cevap seçenekleri -->
+            <div id="answerOptions" class="answer-options">
+                <button class="answer-btn" data-index="0"></button>
+                <button class="answer-btn" data-index="1"></button>
+                <button class="answer-btn" data-index="2"></button>
+                <button class="answer-btn" data-index="3"></button>
+            </div>
+            <div id="feedback" class="feedback"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
