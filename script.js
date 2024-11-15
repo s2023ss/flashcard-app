@@ -22,6 +22,8 @@ const feedback = document.getElementById('feedback');
 const correctCountElement = document.getElementById('correctCount');
 const wrongCountElement = document.getElementById('wrongCount');
 const successRateElement = document.getElementById('successRate');
+const timerElement = document.getElementById('timer');
+const learningSection = document.getElementById('learningSection');
 
 // Kelime listesi ve istatistikler için veri yapısı
 let words = [];
@@ -30,6 +32,8 @@ let stats = {
     correct: 0,
     wrong: 0
 };
+let timeLeft = 30;
+let timerInterval;
 
 // Supabase'den kelimeleri yükleme
 async function loadWords() {
@@ -57,14 +61,24 @@ addWordBtn.addEventListener('click', () => {
 });
 
 startLearningBtn.addEventListener('click', async () => {
-    await loadWords(); // Kelimeleri yeniden yükle
-    if (words.length === 0) {
-        alert('Lütfen önce kelime ekleyin!');
-        return;
+    try {
+        await loadWords(); // Kelimeleri yeniden yükle
+        if (words.length === 0) {
+            alert('Lütfen önce kelime ekleyin!');
+            return;
+        }
+        currentWordIndex = 0;
+        stats.correct = 0;
+        stats.wrong = 0;
+        learningSection.style.display = 'block';
+        flashcardArea.classList.remove('hidden');
+        addWordForm.classList.add('hidden');
+        showCurrentWord();
+        startTimer(); // Timer'ı başlat
+    } catch (error) {
+        console.error('Öğrenme başlatılırken hata:', error);
+        alert('Öğrenme başlatılırken bir hata oluştu!');
     }
-    addWordForm.classList.add('hidden');
-    flashcardArea.classList.remove('hidden');
-    showCurrentWord();
 });
 
 saveWordBtn.addEventListener('click', saveWord);
@@ -230,6 +244,8 @@ function showPreviousWord() {
     if (currentWordIndex > 0) {
         currentWordIndex--;
         showCurrentWord();
+        clearInterval(timerInterval);
+        startTimer();
     }
 }
 
@@ -238,6 +254,10 @@ function showNextWord() {
     if (currentWordIndex < words.length - 1) {
         currentWordIndex++;
         showCurrentWord();
+        clearInterval(timerInterval);
+        startTimer();
+    } else {
+        endLearningSession();
     }
 }
 
@@ -245,4 +265,37 @@ function showNextWord() {
 function updateNavigationButtons() {
     prevBtn.disabled = currentWordIndex === 0;
     nextBtn.disabled = currentWordIndex === words.length - 1;
+}
+
+// Timer'ı başlat
+function startTimer() {
+    timeLeft = 30;
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 10) {
+            timerElement.classList.add('warning');
+        }
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endLearningSession();
+        }
+    }, 1000);
+}
+
+// Timer'ı güncelle
+function updateTimerDisplay() {
+    timerElement.textContent = timeLeft;
+}
+
+// Öğrenme oturumunu bitir
+function endLearningSession() {
+    clearInterval(timerInterval);
+    learningSection.style.display = 'none';
+    alert(`Süre bitti!\nDoğru: ${stats.correct}\nYanlış: ${stats.wrong}`);
+    // İstatistikleri güncelle
+    updateStats();
 }

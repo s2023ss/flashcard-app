@@ -40,28 +40,31 @@
 
         <!-- Flashcard Alanı -->
         <div id="flashcardArea" class="hidden">
-            <div class="flashcard" id="flashcard">
-                <div class="flashcard-inner">
-                    <div class="flashcard-front">
-                        <p id="wordDisplay"></p>
-                    </div>
-                    <div class="flashcard-back">
-                        <p id="meaningDisplay"></p>
+            <div id="learningSection" style="display: none;">
+                <div id="timer" class="timer">30</div>
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <p id="wordDisplay"></p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p id="meaningDisplay"></p>
+                        </div>
                     </div>
                 </div>
+                <div class="flashcard-buttons">
+                    <button id="prevBtn">Önceki</button>
+                    <button id="nextBtn">Sonraki</button>
+                </div>
+                <!-- Cevap seçenekleri -->
+                <div id="answerOptions" class="answer-options">
+                    <button class="answer-btn" data-index="0"></button>
+                    <button class="answer-btn" data-index="1"></button>
+                    <button class="answer-btn" data-index="2"></button>
+                    <button class="answer-btn" data-index="3"></button>
+                </div>
+                <div id="feedback" class="feedback"></div>
             </div>
-            <div class="flashcard-buttons">
-                <button id="prevBtn">Önceki</button>
-                <button id="nextBtn">Sonraki</button>
-            </div>
-            <!-- Cevap seçenekleri -->
-            <div id="answerOptions" class="answer-options">
-                <button class="answer-btn" data-index="0"></button>
-                <button class="answer-btn" data-index="1"></button>
-                <button class="answer-btn" data-index="2"></button>
-                <button class="answer-btn" data-index="3"></button>
-            </div>
-            <div id="feedback" class="feedback"></div>
         </div>
     </div>
     <script src="script.js"></script>
